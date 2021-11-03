@@ -5,13 +5,13 @@ import axios from 'axios';
 class Read extends Component{
 
     componentDidMount() {
-        //Use axios to interact with API
-        axios.get('https://jsonblob.com/api/jsonblob/894944504570986496')
+        //Use axios to interact with API -- Talks HTTP 
+        axios.get('http://localhost:4000/api/movies') //Async req
         // Callback function
         .then((response)=>{
-            // update state
+            // update state, callback function ^
             this.setState({
-                myMovies: response.data.movies
+                myMovies: response.data.myMovies
             })
         })
         // if not working catch, and thow error

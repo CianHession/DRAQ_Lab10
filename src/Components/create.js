@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import axious from 'axios'; //Allows to talk http, interact with api
+import axios from 'axios';
 
 class Create extends Component {
     constructor() {
@@ -19,11 +20,21 @@ class Create extends Component {
     }
 
     handleSubmit(event) {
-        console.log("Button Clicked");
-        //Output Movie Data
-        console.log(this.state.Title);
-        console.log(this.state.Year);
-        console.log(this.state.Poster);
+        //obj for new movie addition
+        const newMovie = {
+            Title: this.state.Title,
+            Year: this.state.Year,
+            Poster: this.state.Poster
+        }
+        //URL + What to Send
+        axios.post('http://localhost:4000/api/movies', newMovie)
+            .then((response) => { //callback function
+                console.log(response);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
         //Stop handleSubmit refreshing page aka returning value to blank
         event.preventDefault();
         //Removes Values left in input boxes, does not reset values to default

@@ -11,7 +11,7 @@ class Read extends Component{
         .then((response)=>{
             // update state, callback function ^
             this.setState({
-                myMovies: response.data.myMovies
+                myMovies: response.data
             })
         })
         // if not working catch, and thow error

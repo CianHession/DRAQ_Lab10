@@ -7,12 +7,12 @@ class MovieItem extends Component {
             <div>
                 {/* Using Card Component from bootstrap */}
                 <Card>
-                    <Card.Header>{this.props.myfilm.Title}</Card.Header>
+                    <Card.Header>{this.props.myfilm.title}</Card.Header>
                     <Card.Body>
                         <blockquote>
-                            <img src={this.props.myfilm.Poster}></img>
+                            <img src={this.props.myfilm.poster}></img>
                             <footer>
-                                <p>{this.props.myfilm.Year}</p>
+                                <p>{this.props.myfilm.year}</p>
                             </footer>
                         </blockquote>
                     </Card.Body>

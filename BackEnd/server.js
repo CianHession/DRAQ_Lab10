@@ -49,11 +49,6 @@ app.get('/api/movies', (req, res) => {
     MovieModel.find((err, data) => {
         res.json(data);
     })
-    //Send JSON Data
-    // res.status(200).json({
-    // message: "Everything is ok",
-    // myMovies: movies})
-
 })
 
 app.get('/api/movies/:id', (req, res) => {
@@ -67,6 +62,7 @@ app.get('/api/movies/:id', (req, res) => {
 app.put('/api/movies/:id', (req, res) => {
     console.log("Updating " + req.params.id);
 
+    //Update Movie by ID
     MovieModel.findByIdAndUpdate(req.params.id, req.body, { new:true },
         (err, data) => {
             res.send(data);
@@ -92,6 +88,20 @@ app.post('/api/movies', (req, res) => {
     res.send("Item Added");
 });
 
+//delete movie by ID
+app.delete('/api/movies/:id',(req,res) =>{
+console.log("Deleting: "+req.params.id);
+//One By One (Per Click)
+MovieModel.deleteOne({_id:req.params.id},
+    //call back function
+    (error,data)=>{
+        if(error)
+        //return error
+            res.send(error);
+            //else send data
+        res.send(data);
+    })
+})
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

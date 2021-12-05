@@ -3,6 +3,7 @@ const app = express()
 const port = 4000;
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 
 //MY Db connection
 const myConnectionString = "mongodb+srv://admin:Zqsdt9$8@cluster0.onmwl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -12,6 +13,11 @@ mongoose.connect(myConnectionString, { useNewUrlParser: true });
 
 //schema
 const Schema = mongoose.Schema;
+
+//Make single page app now
+app.use(express.static(path.join(__dirname, '../build')));
+app.use('static', express.static(path.join(__dirname, 'build/static')));
+
 
 //Movie Schema
 var movieSchema = new Schema({
@@ -103,6 +109,10 @@ MovieModel.deleteOne({_id:req.params.id},
     })
 })
 
+//SendFile for sinlge page app
+app.get('*', (req,res)=>{
+    res.SendFile(path.join(__dirname+'/../build.index.html'));
+})
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
